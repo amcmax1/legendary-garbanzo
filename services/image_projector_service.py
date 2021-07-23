@@ -10,7 +10,7 @@ class ImageProjectorService:
         self.center_point = np.array([.7, .5])
         self.uuid = self.image_uuid()
 
-    def image_uuid(self):
+    def image_uuid(self):  # todo: extract to base service class
         full_path = self.er_image_path.split('.')
         partial_path = full_path[0].split('/')
         return partial_path[-1]
@@ -20,5 +20,5 @@ class ImageProjectorService:
         nfov = NFOV()
         gp_image = nfov.toNFOV(ed_image, self.center_point)
         plt.imshow(gp_image)
-        plt.savefig(f'./assets/projector_images/{self.uuid}.jpg')
+        plt.savefig(f'./assets/projector_images/{self.uuid}.jpg')  # todo: extract to base service class
         plt.show()

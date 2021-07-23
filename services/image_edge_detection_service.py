@@ -14,7 +14,7 @@ class ImageEdgeDetectionService:
         else:
             return [100, 150]
 
-    def image_uuid(self):
+    def image_uuid(self):  # todo: extract to base service class
         full_path = self.er_image_path.split('.')
         partial_path = full_path[0].split('/')
         return partial_path[-1]
@@ -24,5 +24,5 @@ class ImageEdgeDetectionService:
         edges = cv2.Canny(ed_image, *self.threshold)
         plt.imshow(edges, cmap='gray')
         plt.title('Edge Image'), plt.xticks([]), plt.yticks([])
-        plt.savefig(f'./assets/detection_images/{self.uuid}.jpg')
+        plt.savefig(f'./assets/detection_images/{self.uuid}.jpg')  # todo: extract to base service class
         plt.show()

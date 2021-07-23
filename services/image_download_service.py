@@ -1,6 +1,7 @@
 import json
 import requests
 import uuid
+import itertools
 
 # todo: determine the file extension of each url before saving file
 # todo: ensure uniqueness of uuid
@@ -18,7 +19,6 @@ class ImageDownloadService:
         json_as_python_hash = json.loads(file_content)
         for key, value in json_as_python_hash.items():
             url_list = [value]
-        import itertools
         self.image_urls = list(itertools.chain(*url_list))
         print(self.image_urls)
 
@@ -26,7 +26,7 @@ class ImageDownloadService:
         for url in self.image_urls:
             res = requests.get(url)
             res.raise_for_status()
-            image_file_uuid = uuid.uuid4().hex[:7]
+            image_file_uuid = uuid.uuid4().hex[:7]  # todo: extract to base service class method
 
             gp_image_file = open(f'./assets/original_images_gp/{image_file_uuid}.jpg', 'wb')
             for chunk in res.iter_content(100000):

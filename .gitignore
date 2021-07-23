@@ -49,3 +49,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# data
+db/
+assets/
